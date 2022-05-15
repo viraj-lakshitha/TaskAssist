@@ -3,11 +3,10 @@
     <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="domain" optional="YES" attributeType="String"/>
-        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="priority" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Task" positionX="-54" positionY="-9" width="128" height="104"/>
+        <element name="Task" positionX="-54" positionY="-9" width="128" height="89"/>
     </elements>
 </model>
