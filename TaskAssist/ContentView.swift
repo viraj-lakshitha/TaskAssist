@@ -107,7 +107,7 @@ struct ContentView: View {
                     }
                 }.pickerStyle(.segmented)
                 
-                Button("Save") {
+                Button(action: {
                     if title != "" && domain != "" {
                         saveTask()
                         undoChanges()
@@ -115,12 +115,14 @@ struct ContentView: View {
                         alertMessage = "Please fill empty fields"
                         isAlertVisible = true
                     }
+                }) {
+                    Text("Save")
+                    .padding(10)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
                 }
-                .padding(10)
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .foregroundColor(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
                 
                 // Display all tasks
                 List {
@@ -130,11 +132,10 @@ struct ContentView: View {
                                 .frame(width: 15)
                                 .foregroundColor(styleForPriority(currTask.priority!))
                             
-                            Spacer().frame(width: 28)
+                            Spacer().frame(width: 15)
                             
                             Text(currTask.title ?? "---")
                                 .font(.headline)
-                                .foregroundColor(Color.black)
                             
                             Spacer()
                             
@@ -142,6 +143,7 @@ struct ContentView: View {
                                 .font(.caption)
                                 .foregroundColor(Color.gray)
                         }
+                        .padding(.trailing, 8.0)
                     }
                     .onDelete(perform: deleteTask)
                 }
@@ -165,6 +167,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let persistedContainer = CoreDataManager.shared.persistenceContainer
-        ContentView().environment(\.managedObjectContext, persistedContainer.viewContext)
+        ContentView()
+            .environment(\.managedObjectContext, persistedContainer.viewContext)
     }
 }
